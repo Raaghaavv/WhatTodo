@@ -22,7 +22,6 @@ struct TodoCreateAndEditView: View {
     init(todo: TodoData) {
         self.todo = todo
         
-        
     }
     
     var body: some View {
