@@ -35,7 +35,7 @@ struct TodoCreateAndEditView: View {
                     Spacer()
                     Button("Create") {
                         
-                        let t = TodoData(id: todo.id, dueDate: editDueDate, dateCompleted: todo.dateCreated, title: editTitle, isComplete: todo.isComplete, details: editDescription, isFavorite: todo.isFavorite)
+                        let t = TodoData(id: todo.id, dueDate: todo.dueDate, dateCompleted: todo.dateCompleted, title: editTitle, isComplete: todo.isComplete, details: editDescription, isFavorite: todo.isFavorite)
                         
                         viewModel.updateTodo(todo: t)
                         
@@ -100,7 +100,7 @@ struct TodoCreateAndEditView: View {
             .onAppear {
                 self.editTitle = todo.title
                 self.editDescription = todo.details
-                self.editDueDate = todo.editDueDate
+//                self.editDueDate = todo.editDueDate
             }
             
         

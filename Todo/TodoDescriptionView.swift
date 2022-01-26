@@ -37,7 +37,7 @@ struct TodoDescriptionView: View {
                 let t = TodoData(
                     id: detailData.id,
                     dueDate: detailData.dueDate,
-                    dateCompleted: detailData.dateCreated,
+                    dateCompleted: detailData.dateCompleted,
                     title: detailData.title,
                     isComplete: detailData.isComplete,
                     details: detailData.details,
