@@ -20,34 +20,44 @@ struct TodoDescriptionView: View {
     }
     
     var body: some View {
-        VStack {
-            Button("Edit") {
-                isPresented = true
-            }
-            .sheet(isPresented: $isPresented) {
+        VStack(alignment: .leading) {
+            HStack {
+                Button {
+                    updateCurrentTodo()
+                } label: {
+                    Image(systemName: "heart.fill")
+                        .renderingMode(.template)
+                        .foregroundColor(detailData.isFavorite ? Color.red : Color.gray)
+                }
                 
-            } content: {
-                TodoCreateAndEditView(todo: detailData)
-                    .environmentObject(viewModel)
+                Spacer()
+                
+                Text("\(detailData.dueDate.simpleString())")
+
+                
+                Spacer()
+
+                Button("Edit") {
+                    isPresented = true
+                }
+                .sheet(isPresented: $isPresented) {
+                    
+                } content: {
+                    TodoCreateAndEditView(todo: detailData)
+                        .environmentObject(viewModel)
+                }
+
             }
+            .padding()
+            
+            VStack {
+                Text("\(detailData.title)")
+            
+                Text("\(detailData.details)")
+            }
+            .padding()
             
             Spacer()
-            
-            Button {
-                updateCurrentTodo()
-            } label: {
-                Image(systemName: "heart.fill")
-                    .renderingMode(.template)
-                    .foregroundColor(detailData.isFavorite ? Color.red : Color.gray)
-            }
-            
-            Spacer()
-            
-            Text("\(detailData.title)")
-            
-            Text("Date: \(detailData.dueDate.simpleString())")
-            
-            Text("\(detailData.details)")
         }
     }
     
