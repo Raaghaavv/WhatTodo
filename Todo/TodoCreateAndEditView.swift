@@ -35,15 +35,20 @@ struct TodoCreateAndEditView: View {
                     Spacer()
                     Button("Create") {
                         
-                        let t = TodoData(id: todo.id, dueDate: todo.dueDate, dateCompleted: todo.dateCompleted, title: editTitle, isComplete: todo.isComplete, details: editDescription, isFavorite: todo.isFavorite)
+                        let t = TodoData(
+                            id: todo.id,
+                            dueDate: todo.dueDate,
+                            dateCompleted: todo.dateCompleted,
+                            title: editTitle,
+                            isComplete: todo.isComplete,
+                            details: editDescription,
+                            isFavorite: todo.isFavorite
+                        )
                         
                         viewModel.updateTodo(todo: t)
-                        
 
                         presentationMode.wrappedValue.dismiss()
                     }
-                    
-                    
                 }
                 .padding()
                 Spacer()
@@ -58,7 +63,6 @@ struct TodoCreateAndEditView: View {
                                 )
                             .frame(height: 30, alignment: .leading)
 
-                            
                             .padding(10)
                         
                         Text("Decription")
@@ -71,7 +75,6 @@ struct TodoCreateAndEditView: View {
                                 )
                             .frame(height: 100, alignment: .leading)
                            
-
                             .padding(10)
                         
                         Spacer()
@@ -85,14 +88,11 @@ struct TodoCreateAndEditView: View {
                                     
                                 )
                             .frame(height: 30, alignment: .leading)
-                           
 
                             .padding(10)
                         
                         Spacer()
-                        
-                        
-                    }
+                }
                 
             // Create two text fields and one date
            

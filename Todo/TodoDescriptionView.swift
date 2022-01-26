@@ -34,22 +34,12 @@ struct TodoDescriptionView: View {
             Spacer()
             
             Button {
-                let t = TodoData(
-                    id: detailData.id,
-                    dueDate: detailData.dueDate,
-                    dateCompleted: detailData.dateCompleted,
-                    title: detailData.title,
-                    isComplete: detailData.isComplete,
-                    details: detailData.details,
-                    isFavorite: !detailData.isFavorite
-                )
-                viewModel.updateTodo(todo: t)
+                updateCurrentTodo()
             } label: {
                 Image(systemName: "heart.fill")
                     .renderingMode(.template)
                     .foregroundColor(detailData.isFavorite ? Color.red : Color.gray)
             }
-
             
             Spacer()
             
@@ -58,9 +48,20 @@ struct TodoDescriptionView: View {
             Text("Date: \(detailData.dueDate.simpleString())")
             
             Text("\(detailData.details)")
-            
-            
         }
+    }
+    
+    private func updateCurrentTodo() {
+        let todo = TodoData(
+            id: detailData.id,
+            dueDate: detailData.dueDate,
+            dateCompleted: detailData.dateCompleted,
+            title: detailData.title,
+            isComplete: detailData.isComplete,
+            details: detailData.details,
+            isFavorite: !detailData.isFavorite
+        )
+        viewModel.updateTodo(todo: todo)
     }
 }
 
