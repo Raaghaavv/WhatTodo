@@ -10,8 +10,9 @@ import SwiftUI
 struct TodoDescriptionView: View {
     @State var isPresented = false
     @EnvironmentObject var viewModel: TodoViewModel
-    // @State private var userDescriptionInput: String = ""
     @State var text: String = " "
+    @State private var confirmationShown = false
+
     
     let detailData: TodoData
     
@@ -23,7 +24,7 @@ struct TodoDescriptionView: View {
         VStack(alignment: .leading) {
             HStack {
                 Button {
-                    updateCurrentTodo()
+                    updateCurrentFavoriteTodo()
                 } label: {
                     Image(systemName: "heart.fill")
                         .renderingMode(.template)
@@ -32,8 +33,35 @@ struct TodoDescriptionView: View {
                 
                 Spacer()
                 
-                Text("\(detailData.dueDate.simpleString())")
-
+                Button {
+                    updateCurrentCompletedTodo()
+                } label: {
+                    Image(systemName: "checkmark.circle.fill")
+                        .renderingMode(.template)
+                        .foregroundColor(detailData.isComplete ? Color.green : Color.gray)
+                }
+                
+                Spacer()
+                
+                Button(
+                        role: .destructive,
+                        action: { confirmationShown = true }
+                    ) {
+                        Image(systemName: "trash")
+                    }
+                
+                .confirmationDialog(
+                    "Are you sure?",
+                     isPresented: $confirmationShown
+                ) {
+                    Button("Delete") {
+                        withAnimation {
+                            viewModel.removeTodo(todoID: detailData.id)
+                        }
+                    }
+                
+                }
+                Spacer()
                 
                 Spacer()
 
@@ -50,18 +78,27 @@ struct TodoDescriptionView: View {
             }
             .padding()
             
-            VStack {
-                Text("\(detailData.title)")
-            
-                Text("\(detailData.details)")
+            ScrollView {
+                VStack {
+                    Text("\(detailData.title)")
+                    
+                    Text("\(detailData.dueDate.simpleString())")
+                
+                    Text("\(detailData.details)")
+                }
+                .padding()
             }
-            .padding()
             
-            Spacer()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+           
+            
         }
+        
+        
     }
     
-    private func updateCurrentTodo() {
+    private func updateCurrentFavoriteTodo() {
         let todo = TodoData(
             id: detailData.id,
             dueDate: detailData.dueDate,
@@ -70,6 +107,19 @@ struct TodoDescriptionView: View {
             isComplete: detailData.isComplete,
             details: detailData.details,
             isFavorite: !detailData.isFavorite
+        )
+        viewModel.updateTodo(todo: todo)
+    }
+    
+    private func updateCurrentCompletedTodo() {
+        let todo = TodoData(
+            id: detailData.id,
+            dueDate: detailData.dueDate,
+            dateCompleted: detailData.dateCompleted,
+            title: detailData.title,
+            isComplete: !detailData.isComplete,
+            details: detailData.details,
+            isFavorite: detailData.isFavorite
         )
         viewModel.updateTodo(todo: todo)
     }

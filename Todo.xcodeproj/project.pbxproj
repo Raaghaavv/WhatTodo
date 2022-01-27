@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0722A1227A270B4006F21F7 /* TodoCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0722A1127A270B1006F21F7 /* TodoCompletedView.swift */; };
 		A08D0FDD279CAD5F0061ECC0 /* TodoRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D0FDC279CAD5F0061ECC0 /* TodoRootView.swift */; };
 		A08D0FDF279CAD610061ECC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A08D0FDE279CAD610061ECC0 /* Assets.xcassets */; };
 		A08D0FE2279CAD610061ECC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A08D0FE1279CAD610061ECC0 /* Preview Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0722A1127A270B1006F21F7 /* TodoCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCompletedView.swift; sourceTree = "<group>"; };
 		A08D0FD7279CAD5F0061ECC0 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08D0FDA279CAD5F0061ECC0 /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
 		A08D0FDC279CAD5F0061ECC0 /* TodoRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRootView.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				A08D0FF2279CB83D0061ECC0 /* TodoDescriptionView.swift */,
 				A08D0FFB279CF6AC0061ECC0 /* TodoCreateAndEditView.swift */,
 				A08D0FFD279CFA840061ECC0 /* TodoFavoritesView.swift */,
+				A0722A1127A270B1006F21F7 /* TodoCompletedView.swift */,
 				A08D0FEC279CB2760061ECC0 /* ViewModels */,
 				A08D0FE9279CAEE80061ECC0 /* DataModels */,
 				A08D0FEF279CB3130061ECC0 /* Controllers */,
@@ -197,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A08D0FFC279CF6AC0061ECC0 /* TodoCreateAndEditView.swift in Sources */,
+				A0722A1227A270B4006F21F7 /* TodoCompletedView.swift in Sources */,
 				A08D0FEE279CB2950061ECC0 /* TodoViewModel.swift in Sources */,
 				A08D0FEB279CAF0D0061ECC0 /* TodoData.swift in Sources */,
 				A08D0FF8279CED6E0061ECC0 /* TodoListView.swift in Sources */,

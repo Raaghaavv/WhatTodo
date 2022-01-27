@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct TodoFavoritesView: View {
+struct TodoCompletedView: View {
     @EnvironmentObject var viewModel: TodoViewModel
    
     
     var body: some View {
         
 
-            let allFavorites = viewModel.allTodos.filter({ $0.isFavorite == true })
+            let allFavorites = viewModel.allTodos.filter({ $0.isComplete == true })
             
         
         NavigationView {
@@ -29,21 +29,21 @@ struct TodoFavoritesView: View {
                 .onDelete(perform: deleteRow)
                
             }
-            .navigationTitle("My Favorite Todos")
+            .navigationTitle("My Completed Todos")
              
         }
     }
     
     private func deleteRow(at offSet: IndexSet) {
-        let allFavorites = viewModel.allTodos.filter({ $0.isFavorite == true })
-        guard let todoID = offSet.map({ allFavorites[$0].id }).first else { return }
+        let allCompleted = viewModel.allTodos.filter({ $0.isComplete == true })
+        guard let todoID = offSet.map({ allCompleted[$0].id }).first else { return }
         viewModel.removeTodo(todoID: todoID)
     }
     
 }
 
-struct TodoFavorites_Previews: PreviewProvider {
+struct TodoCompletedView_Previews: PreviewProvider {
     static var previews: some View {
-        TodoFavoritesView()
+        TodoCompletedView()
     }
 }

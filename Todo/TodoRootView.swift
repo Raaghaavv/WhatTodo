@@ -18,6 +18,8 @@ struct TodoRootView: View {
     
     var body: some View {
         TabView {
+            
+            
             TodoListView(todos: viewModel.allTodos)
                 .tabItem {
                     Image(systemName: "house.fill")
@@ -30,6 +32,14 @@ struct TodoRootView: View {
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Favorites")
+                    
+                }
+                .environmentObject(viewModel)
+            
+            TodoCompletedView()
+                .tabItem {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text("Completed")
                     
                 }
                 .environmentObject(viewModel)

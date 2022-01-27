@@ -26,12 +26,22 @@ struct TodoListRowView: View {
                     .foregroundColor(Color.yellow)
             }
             
+            if todo.isFavorite {
+                Image(systemName: "heart.fill")
+                    .renderingMode(.template)
+                    .foregroundColor(Color.red)
+            }
+            
             VStack(alignment: .leading) {
                 Text("\(todo.title)")
                 Text("\(todo.dueDate.simpleString())")
                     .foregroundColor(.secondary)
                     .font(Font.system(size: 12))
             }
+            
+            
+            
+            
         }
     }
 }

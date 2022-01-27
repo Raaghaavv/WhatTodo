@@ -79,19 +79,6 @@ struct TodoCreateAndEditView: View {
                         
                         Spacer()
                     
-                        Text("Due Date")
-                            .padding(10)
-                        TextEditor(text: $editDueDate)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.black, lineWidth: 2)
-                                    
-                                )
-                            .frame(height: 30, alignment: .leading)
-
-                            .padding(10)
-                        
-                        Spacer()
                 }
                 
             // Create two text fields and one date
