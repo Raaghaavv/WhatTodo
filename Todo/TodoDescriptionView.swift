@@ -10,7 +10,6 @@ import SwiftUI
 struct TodoDescriptionView: View {
     @State var isPresented = false
     @EnvironmentObject var viewModel: TodoViewModel
-    @State var text: String = " "
     @State private var confirmationShown = false
 
     

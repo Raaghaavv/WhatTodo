@@ -49,6 +49,7 @@ struct TodoCreateAndEditView: View {
 
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .disabled(editTitle.isEmpty || editDescription.isEmpty)
                 }
                 .padding()
                 Spacer()
