@@ -12,21 +12,23 @@ struct TodoCompletedView: View {
    
     
     var body: some View {
-        
-
-            let allFavorites = viewModel.allTodos.filter({ $0.isComplete == true })
+        let allCompleted = viewModel.allTodos.filter({ $0.isComplete == true })
             
-        
         NavigationView {
             List {
-                ForEach(allFavorites) { todo in
-                    NavigationLink {
-                        TodoDescriptionView(detailData: todo)
-                    } label: {
-                        TodoListRowView(todo: todo)
+                if allCompleted.isEmpty {
+                    Text("Your completed todos will show here. Mark your completed todo by pressing the checkmark.")
+                        .foregroundColor(.secondary)
+                } else {
+                    ForEach(allCompleted) { todo in
+                        NavigationLink {
+                            TodoDescriptionView(detailData: todo)
+                        } label: {
+                            TodoListRowView(todo: todo)
+                        }
                     }
+                    .onDelete(perform: deleteRow)
                 }
-                .onDelete(perform: deleteRow)
                
             }
             .navigationTitle("My Completed Todos")

@@ -9,24 +9,25 @@ import SwiftUI
 
 struct TodoFavoritesView: View {
     @EnvironmentObject var viewModel: TodoViewModel
-   
     
     var body: some View {
-        
-
-            let allFavorites = viewModel.allTodos.filter({ $0.isFavorite == true })
-            
+        let allFavorites = viewModel.allTodos.filter({ $0.isFavorite == true })
         
         NavigationView {
             List {
-                ForEach(allFavorites) { todo in
-                    NavigationLink {
-                        TodoDescriptionView(detailData: todo)
-                    } label: {
-                        TodoListRowView(todo: todo)
+                if allFavorites.isEmpty {
+                    Text("Your favorite todos will show here. Click the heart to add or remove your favorite todo.")
+                        .foregroundColor(.secondary)
+                } else {
+                    ForEach(allFavorites) { todo in
+                        NavigationLink {
+                            TodoDescriptionView(detailData: todo)
+                        } label: {
+                            TodoListRowView(todo: todo)
+                        }
                     }
+                    .onDelete(perform: deleteRow)
                 }
-                .onDelete(perform: deleteRow)
                
             }
             .navigationTitle("My Favorite Todos")

@@ -26,6 +26,7 @@ struct TodoListView: View {
                     ForEach(todos) { todo in
                         NavigationLink {
                             TodoDescriptionView(detailData: todo)
+                                .navigationBarTitleDisplayMode(.inline)
                         } label: {
                             TodoListRowView(todo: todo)
                         }
@@ -44,7 +45,7 @@ struct TodoListView: View {
                     .sheet(isPresented: $isPresented) {
                         
                     } content: {
-                        TodoCreateAndEditView(todo: TodoData())
+                        TodoCreateAndEditView(todo: TodoData(), isCreating: true)
                             .environmentObject(viewModel)
                     }
                 }

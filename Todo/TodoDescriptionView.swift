@@ -60,29 +60,36 @@ struct TodoDescriptionView: View {
                     }
                 
                 }
-                Spacer()
                 
                 Spacer()
 
-                Button("Edit") {
+                Button {
                     isPresented = true
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                        .renderingMode(.template)
+                        .foregroundColor(Color.accentColor)
                 }
                 .sheet(isPresented: $isPresented) {
                     
                 } content: {
-                    TodoCreateAndEditView(todo: detailData)
+                    TodoCreateAndEditView(todo: detailData, isCreating: false)
                         .environmentObject(viewModel)
                 }
 
             }
             .padding()
             
-            ScrollView {
-                VStack {
-                    Text("\(detailData.title)")
-                    
-                    Text("\(detailData.dueDate.simpleString())")
+            VStack(alignment: .center) {
+                Text("\(detailData.title)")
                 
+                Text("\(detailData.dueDate.simpleString())")
+                    .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+            
+            ScrollView {
+                VStack(alignment: .leading) {
                     Text("\(detailData.details)")
                 }
                 .padding()
@@ -90,10 +97,7 @@ struct TodoDescriptionView: View {
             
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
-           
-            
         }
-        
         
     }
     

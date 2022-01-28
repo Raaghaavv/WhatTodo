@@ -13,27 +13,29 @@ struct TodoCreateAndEditView: View {
     @State var editDueDate: String = ""
     
     @EnvironmentObject var viewModel: TodoViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     
     @Environment(\.presentationMode) var presentationMode
 
     let todo: TodoData
+    let isCreating: Bool
     
-    init(todo: TodoData) {
+    init(todo: TodoData, isCreating: Bool) {
         self.todo = todo
-        
+        self.isCreating = isCreating
     }
     
     var body: some View {
 
-            VStack {
+        VStack(spacing: 15) {
                 HStack {
                     Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
                     
                     Spacer()
-                    Button("Create") {
+                    Button(currentSaveTitle) {
                         
                         let t = TodoData(
                             id: todo.id,
@@ -51,40 +53,47 @@ struct TodoCreateAndEditView: View {
                     }
                     .disabled(editTitle.isEmpty || editDescription.isEmpty)
                 }
-                .padding()
-                Spacer()
+            
+  
+        
                     
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 25) {
+                    VStack(alignment: .leading, spacing: 5) {
                         Text("Title")
-                            .padding(10)
-                        TextEditor(text: $editTitle)
+                    
+                        TextField("", text: $editTitle)
+                        .padding(5)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.black, lineWidth: 2)
+                                    .stroke(currentBorderColor, lineWidth: 0.5)
                                 )
-                            .frame(height: 30, alignment: .leading)
-
-                            .padding(10)
-                        
+                           // .frame(height: 30, alignment: .leading)
+                            .lineLimit(1)
+                    }
+               
+                    VStack(alignment: .leading, spacing: 5) {
                         Text("Decription")
-                            .padding(10)
+                    
                         TextEditor(text: $editDescription)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.black, lineWidth: 2)
+                                    .stroke(currentBorderColor, lineWidth: 0.5)
                                     
                                 )
-                            .frame(height: 100, alignment: .leading)
-                           
-                            .padding(10)
-                        
-                        Spacer()
+                            .frame(maxHeight: .infinity, alignment: .leading)
+                    }
+                    
+                    
                     
                 }
+               
+    
                 
             // Create two text fields and one date
            
             }
+            .padding()
+        
             .onAppear {
                 self.editTitle = todo.title
                 self.editDescription = todo.details
@@ -93,10 +102,19 @@ struct TodoCreateAndEditView: View {
             
         
     }
+     
+    private var currentBorderColor: Color {
+        colorScheme == .dark ? .white : .black
+    }
+    
+    private var currentSaveTitle: String {
+        isCreating ? "Create" : "Save"
+    }
+    
 }
 
 struct TodoCreateAndEditView_Previews: PreviewProvider {
     static var previews: some View {
-        TodoCreateAndEditView(todo: TodoData())
+        TodoCreateAndEditView(todo: TodoData(), isCreating: false)
     }
 }

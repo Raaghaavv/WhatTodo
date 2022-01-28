@@ -21,7 +21,7 @@ struct TodoListRowView: View {
                     .renderingMode(.template)
                     .foregroundColor(Color.green)
             } else {
-                Image(systemName: "minus.circle")
+                Image(systemName: "exclamationmark.circle")
                     .renderingMode(.template)
                     .foregroundColor(Color.yellow)
             }
