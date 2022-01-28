@@ -94,8 +94,7 @@ struct TodoDescriptionView: View {
                 }
                 .padding()
             }
-            
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             
         }
         

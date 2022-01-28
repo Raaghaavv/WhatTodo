@@ -25,7 +25,7 @@
 
 /* Begin PBXFileReference section */
 		A0722A1127A270B1006F21F7 /* TodoCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCompletedView.swift; sourceTree = "<group>"; };
-		A08D0FD7279CAD5F0061ECC0 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08D0FD7279CAD5F0061ECC0 /* WhatToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08D0FDA279CAD5F0061ECC0 /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
 		A08D0FDC279CAD5F0061ECC0 /* TodoRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRootView.swift; sourceTree = "<group>"; };
 		A08D0FDE279CAD610061ECC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		A08D0FD8279CAD5F0061ECC0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A08D0FD7279CAD5F0061ECC0 /* Todo.app */,
+				A08D0FD7279CAD5F0061ECC0 /* WhatToDo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,7 +146,7 @@
 			);
 			name = Todo;
 			productName = Todo;
-			productReference = A08D0FD7279CAD5F0061ECC0 /* Todo.app */;
+			productReference = A08D0FD7279CAD5F0061ECC0 /* WhatToDo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -355,7 +355,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.productive.life.Todo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WhatToDo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -384,7 +384,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.productive.life.Todo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WhatToDo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
