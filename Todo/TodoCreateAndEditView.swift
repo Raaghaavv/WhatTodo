@@ -72,7 +72,7 @@ struct TodoCreateAndEditView: View {
                     }
                
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Decription")
+                        Text("Description")
                     
                         TextEditor(text: $editDescription)
                             .overlay(

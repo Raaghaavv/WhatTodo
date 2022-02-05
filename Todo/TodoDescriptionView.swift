@@ -7,6 +7,31 @@
 
 import SwiftUI
 
+
+struct SheetView: View {
+    @Environment(\.presentationMode) var presentationMode
+    let action: (Bool) -> Void
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Are you sure you want to delete?")
+            
+            HStack(spacing: 20) {
+                Button("Delete") {
+                    presentationMode.wrappedValue.dismiss()
+                    action(true)
+                }
+                
+                Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        }
+        .padding()
+        .frame(height: 300)
+    }
+}
+
 struct TodoDescriptionView: View {
     @State var isPresented = false
     @EnvironmentObject var viewModel: TodoViewModel
@@ -41,24 +66,42 @@ struct TodoDescriptionView: View {
                 }
                 
                 Spacer()
-                
-                Button(
+
+                if #available(iOS 15.0, *) {
+                    Button(
                         role: .destructive,
                         action: { confirmationShown = true }
                     ) {
                         Image(systemName: "trash")
                     }
-                
-                .confirmationDialog(
-                    "Are you sure?",
-                     isPresented: $confirmationShown
-                ) {
-                    Button("Delete") {
-                        withAnimation {
-                            viewModel.removeTodo(todoID: detailData.id)
+                    
+                    .confirmationDialog(
+                        "Are you sure?",
+                        isPresented: $confirmationShown
+                    ) {
+                        Button("Delete") {
+                            withAnimation {
+                                viewModel.removeTodo(todoID: detailData.id)
+                            }
                         }
+                        
                     }
-                
+                } else {
+                    Button {
+                        confirmationShown.toggle()
+                    } label: {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    .sheet(isPresented: $confirmationShown) {
+                        SheetView(action: { proceed in
+                            if proceed {
+                                withAnimation {
+                                    viewModel.removeTodo(todoID: detailData.id)
+                                }
+                            }
+                        })
+                    }
                 }
                 
                 Spacer()
@@ -129,6 +172,6 @@ struct TodoDescriptionView: View {
 
 struct TodoDescriptionView_Previews: PreviewProvider {
     static var previews: some View {
-        TodoDescriptionView(detailData: TodoData(title: "Decription", isComplete: true, details: "", isFavorite: true))
+        TodoDescriptionView(detailData: TodoData(title: "Description", isComplete: true, details: "", isFavorite: true))
     }
 }
