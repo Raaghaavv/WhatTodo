@@ -30,6 +30,7 @@ struct TodoFavoritesView: View {
                 }
                
             }
+            .listStyle(.sidebar)
             .navigationTitle("My Favorite Todos")
              
         }

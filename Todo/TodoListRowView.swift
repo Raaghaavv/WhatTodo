@@ -38,10 +38,6 @@ struct TodoListRowView: View {
                     .foregroundColor(.secondary)
                     .font(Font.system(size: 12))
             }
-            
-            
-            
-            
         }
     }
 }

@@ -7,36 +7,10 @@
 
 import SwiftUI
 
-
-struct SheetView: View {
-    @Environment(\.presentationMode) var presentationMode
-    let action: (Bool) -> Void
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("Are you sure you want to delete?")
-            
-            HStack(spacing: 20) {
-                Button("Delete") {
-                    presentationMode.wrappedValue.dismiss()
-                    action(true)
-                }
-                
-                Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
-        }
-        .padding()
-        .frame(height: 300)
-    }
-}
-
 struct TodoDescriptionView: View {
     @State var isPresented = false
     @EnvironmentObject var viewModel: TodoViewModel
     @State private var confirmationShown = false
-
     
     let detailData: TodoData
     
@@ -67,41 +41,23 @@ struct TodoDescriptionView: View {
                 
                 Spacer()
 
-                if #available(iOS 15.0, *) {
-                    Button(
-                        role: .destructive,
-                        action: { confirmationShown = true }
-                    ) {
-                        Image(systemName: "trash")
+                Button(
+                    role: .destructive,
+                    action: { confirmationShown = true }
+                ) {
+                    Image(systemName: "trash")
+                }
+                
+                .confirmationDialog(
+                    "Are you sure?",
+                    isPresented: $confirmationShown
+                ) {
+                    Button("Delete") {
+                        withAnimation {
+                            viewModel.removeTodo(todoID: detailData.id)
+                        }
                     }
                     
-                    .confirmationDialog(
-                        "Are you sure?",
-                        isPresented: $confirmationShown
-                    ) {
-                        Button("Delete") {
-                            withAnimation {
-                                viewModel.removeTodo(todoID: detailData.id)
-                            }
-                        }
-                        
-                    }
-                } else {
-                    Button {
-                        confirmationShown.toggle()
-                    } label: {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                    }
-                    .sheet(isPresented: $confirmationShown) {
-                        SheetView(action: { proceed in
-                            if proceed {
-                                withAnimation {
-                                    viewModel.removeTodo(todoID: detailData.id)
-                                }
-                            }
-                        })
-                    }
                 }
                 
                 Spacer()
@@ -125,22 +81,30 @@ struct TodoDescriptionView: View {
             
             VStack(alignment: .center) {
                 Text("\(detailData.title)")
+                    .font(.title)
                 
                 Text("\(detailData.dueDate.simpleString())")
                     .foregroundColor(.secondary)
+                    .font(.subheadline)
             }
             .frame(maxWidth: .infinity)
             
             ScrollView {
                 VStack(alignment: .leading) {
-                    Text("\(detailData.details)")
+                    VStack(alignment: .leading) {
+                        Text("\(detailData.details)")
+                        Spacer()
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .background(Color(UIColor.yellow.withAlphaComponent(0.1)))
                 }
-                .padding()
+                .padding(8)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            
         }
-        
+        .navigationBarTitle("", displayMode: .inline)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     private func updateCurrentFavoriteTodo() {

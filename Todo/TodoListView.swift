@@ -26,7 +26,6 @@ struct TodoListView: View {
                     ForEach(todos) { todo in
                         NavigationLink {
                             TodoDescriptionView(detailData: todo)
-                                .navigationBarTitleDisplayMode(.inline)
                         } label: {
                             TodoListRowView(todo: todo)
                         }
@@ -50,17 +49,13 @@ struct TodoListView: View {
                     }
                 }
             }
-            
         }
-                
     }
     
     private func deleteRow(at offSet: IndexSet) {
-        
         guard let todoID = offSet.map({ todos[$0].id }).first else { return }
         viewModel.removeTodo(todoID: todoID)
     }
-    
 }
 
 struct TodoListView_Previews: PreviewProvider {

@@ -31,8 +31,8 @@ struct TodoCompletedView: View {
                 }
                
             }
+            .listStyle(.sidebar)
             .navigationTitle("My Completed Todos")
-             
         }
     }
     
